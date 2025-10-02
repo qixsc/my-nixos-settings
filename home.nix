@@ -50,12 +50,22 @@ in
     gnumake
     ripgrep
     fzf
-    (python313.withPackages (python-pkgs: with python313Packages; [
-      virtualenv
+    (python3.withPackages (pypkgs: with pypkgs; [
       pip
+      virtualenv
+      autopep8
+      numpy
+      manim
+      sympy
+      matplotlib
     ]))
     dotnet-sdk
     tinymist
+    ani-cli
+    vlc
+    traceroute
+    linux-wifi-hotspot
+    kdePackages.kdeconnect-kde
   ];
   
   programs.nixvim = {
@@ -89,6 +99,11 @@ in
             exportPdf = "onSave";
           };
         };
+        pylsp = {
+          enable = true;
+          settings = {
+          };
+        };
       };
     };
 
@@ -97,6 +112,8 @@ in
       vim-airline
       vim-airline-themes
       auto-pairs
+      # nvim-cmp
+      # cmp-nvim-lsp
       # typst-vim
       # rust-vim
     ];
@@ -106,7 +123,7 @@ in
       filetype plugin indent on
       
       let g:rustfmt_autosave=1
-      let g:AutoPairsFlyMode = 1
+      au FileType typst let b:AutoPairs = AutoPairsDefine({'$': '$'})
   
       nnoremap <C-n> :NERDTree<CR>
       nnoremap <C-t> :NERDTreeToggle<CR>
@@ -116,6 +133,16 @@ in
       let g:airline_theme = "base16"
     '';
   };
+
+  # services.create_ap = {
+  #   enable = true;
+  #   settings = {
+  #     INTERNET_IFACE = "eno2";
+  #     WIFI_IFACE = "wlo1";
+  #     SSID = "qixsc-hotspot";
+  #     PASSPHASE = "1145142929810";
+  #   };
+  # };
 
   # htop settings
   programs.htop = {
@@ -161,10 +188,7 @@ in
   #
   #  /etc/profiles/per-user/qixsc/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-
+  
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

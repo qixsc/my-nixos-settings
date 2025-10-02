@@ -52,6 +52,7 @@
     fcitx5.addons = with pkgs; [
       fcitx5-gtk
       fcitx5-chinese-addons
+      fcitx5-table-extra
       fcitx5-rime
     ];
   };
@@ -134,13 +135,9 @@
     description = "qixsc";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
   programs.git = {
     enable = true;
   };
@@ -184,6 +181,13 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # enable port for kde connect
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
+    allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
