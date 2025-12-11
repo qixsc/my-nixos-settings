@@ -1,10 +1,11 @@
 {
-  description = "A very basic flake";
+  description = "Flake config of qixsc";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -28,17 +29,11 @@
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager{
-          home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ];
+          home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
           home-manager.users.qixsc = import ./home.nix;
         }
       ];
     };
 
-    # "qixsc@nixos" = home-manager.lib.homeManagerConfiguration {
-    #   inherit pkgs;
-    #   modulus = [
-    #     ./home.nix
-    #   ];
-    # };
   };
 }

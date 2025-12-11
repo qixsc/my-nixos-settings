@@ -55,7 +55,6 @@ in
       virtualenv
       autopep8
       numpy
-      manim
       sympy
       matplotlib
     ]))
