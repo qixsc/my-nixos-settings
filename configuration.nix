@@ -157,6 +157,7 @@
     wget
     asusctl
     supergfxctl
+    networkmanager-fortisslvpn
   ];
 
 
