@@ -148,6 +148,8 @@
   programs.git = {
     enable = true;
   };
+  programs.ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+
   hardware.steam-hardware.enable = true;
 
   # List packages installed in system profile. To search, run:
