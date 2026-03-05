@@ -28,20 +28,6 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the # parentheses. Maybe you want to install Nerd Fonts with a limited number of # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
     fastfetch
     rustup
     typst
@@ -111,6 +97,7 @@ in
       vim-airline
       vim-airline-themes
       auto-pairs
+      vim-wakatime
       # nvim-cmp
       # cmp-nvim-lsp
       # typst-vim
@@ -133,15 +120,31 @@ in
     '';
   };
 
-  # services.create_ap = {
-  #   enable = true;
-  #   settings = {
-  #     INTERNET_IFACE = "eno2";
-  #     WIFI_IFACE = "wlo1";
-  #     SSID = "qixsc-hotspot";
-  #     PASSPHASE = "1145142929810";
-  #   };
-  # };
+  programs.helix = {
+    enable = true;
+    # languages = {
+    #   language-sever.tinymist = with pkgs; {
+    #     command = "${tinymist}"
+    #   };
+    # };
+    languages = {
+      language = [
+        {
+          name = "typst";
+          auto-format = false;
+          language-servers = [ "tinymist" ];
+        }
+      ];
+
+      language-server.tinymist = with pkgs;{
+        command = "${tinymist}/bin/tinymist";
+        config = {
+          exportPdf = "onSave";
+       
+        };
+      };
+    };
+  };
 
   # htop settings
   programs.htop = {
@@ -151,10 +154,6 @@ in
       hide_kernel_threads = 1;
     };
   };
-
-  #programs.nixvim = {
-  #  enable = true;
-  #};
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
