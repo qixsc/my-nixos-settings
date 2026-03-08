@@ -96,7 +96,10 @@
     nvidiaBusId = "PCI:1:0:0";
   };
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.nvidia_x11
+    # config.boot.kernelPackages.r8168
+  ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

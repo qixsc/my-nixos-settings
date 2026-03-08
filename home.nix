@@ -3,7 +3,7 @@
 let 
   # nixvim = import (builtins.fetchGit{
   #   url = "https://github.com/nix-community/nixvim";
-  #   ref = "nixos-25.05";
+  #   ref = "nixos-25.11";
   # });
 in
 {
@@ -23,7 +23,7 @@ in
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -53,72 +53,72 @@ in
     kdePackages.kdeconnect-kde
   ];
   
-  programs.nixvim = {
-    enable = true;
-    colorschemes.gruvbox.enable = true;
+  # programs.nixvim = {
+  #   enable = true;
+  #   colorschemes.gruvbox.enable = true;
 
-    opts = {
-      number = true;
-      relativenumber = true;
-      smartindent = true;
-      tabstop = 4;
-      shiftwidth = 4;
-      smartcase = true;
-      hlsearch = true;
-      encoding = "utf-8";
-    };
+  #   opts = {
+  #     number = true;
+  #     relativenumber = true;
+  #     smartindent = true;
+  #     tabstop = 4;
+  #     shiftwidth = 4;
+  #     smartcase = true;
+  #     hlsearch = true;
+  #     encoding = "utf-8";
+  #   };
 
-    plugins.lsp = {
-      enable = true;
-      servers = {
-        rust_analyzer = {
-          enable = true;
-          installCargo = false;
-          installRustc = false;
-          settings = {};
-        };
-        tinymist = {
-          enable = true;
-          settings = {
-            formatterMode = "typstyle";
-            exportPdf = "onSave";
-          };
-        };
-        pylsp = {
-          enable = true;
-          settings = {
-          };
-        };
-      };
-    };
+  #   plugins.lsp = {
+  #     enable = true;
+  #     servers = {
+  #       rust_analyzer = {
+  #         enable = true;
+  #         installCargo = false;
+  #         installRustc = false;
+  #         settings = {};
+  #       };
+  #       tinymist = {
+  #         enable = true;
+  #         settings = {
+  #           formatterMode = "typstyle";
+  #           exportPdf = "onSave";
+  #         };
+  #       };
+  #       pylsp = {
+  #         enable = true;
+  #         settings = {
+  #         };
+  #       };
+  #     };
+  #   };
 
-    extraPlugins = with pkgs.vimPlugins; [
-      nerdtree
-      vim-airline
-      vim-airline-themes
-      auto-pairs
-      vim-wakatime
-      # nvim-cmp
-      # cmp-nvim-lsp
-      # typst-vim
-      # rust-vim
-    ];
+  #   extraPlugins = with pkgs.vimPlugins; [
+  #     nerdtree
+  #     vim-airline
+  #     vim-airline-themes
+  #     auto-pairs
+  #     vim-wakatime
+  #     # nvim-cmp
+  #     # cmp-nvim-lsp
+  #     # typst-vim
+  #     # rust-vim
+  #   ];
 
-    extraConfigVim = ''
-      syntax enable
-      filetype plugin indent on
+  #   extraConfigVim = ''
+  #     syntax enable
+  #     filetype plugin indent on
       
-      let g:rustfmt_autosave=1
-      au FileType typst let b:AutoPairs = AutoPairsDefine({'$': '$'})
+  #     let g:rustfmt_autosave=1
+  #     au FileType typst let b:AutoPairs = AutoPairsDefine({'$': '$'})
   
-      nnoremap <C-n> :NERDTree<CR>
-      nnoremap <C-t> :NERDTreeToggle<CR>
-      nnoremap <C-f> :NERDTreeFind<CR>
-      autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
+  #     nnoremap <C-n> :NERDTree<CR>
+  #     nnoremap <C-t> :NERDTreeToggle<CR>
+  #     nnoremap <C-f> :NERDTreeFind<CR>
+  #     autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
       
-      let g:airline_theme = "base16"
-    '';
-  };
+  #     let g:airline_theme = "base16"
+  #   '';
+  # };
 
   programs.helix = {
     enable = true;
