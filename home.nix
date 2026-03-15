@@ -36,6 +36,7 @@ in
     gnumake
     ripgrep
     fzf
+    lazygit
     (python3.withPackages (pypkgs: with pypkgs; [
       pip
       virtualenv
