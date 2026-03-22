@@ -12,9 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  # boot.extraModprobeConfig = "
-  #     options iwlwifi power_save=0
-  #   ";
+  
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/ef750768-7278-469d-b8e6-f86311054261";
@@ -31,5 +29,5 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.enableAllFirmware = true;
+  # hardware.enableAllFirmware = true;
 }

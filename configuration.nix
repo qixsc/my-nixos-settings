@@ -120,6 +120,13 @@
     #media-session.enable = true;
   };
 
+  boot.extraModprobeConfig = "
+    options iwlwifi power_save=0
+    options iwlwifi 11n_disable=1
+    options iwlwifi swcrypto=1
+  ";
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
   #bluetooth enable
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; 
