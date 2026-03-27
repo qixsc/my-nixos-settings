@@ -52,6 +52,8 @@ in
     traceroute
     linux-wifi-hotspot
     kdePackages.kdeconnect-kde
+    android-tools
+    qtscrcpy
   ];
   
   # programs.nixvim = {
